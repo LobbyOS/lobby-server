@@ -1,0 +1,109 @@
+.panel.top{
+  left: 15%;
+}
+.contents h2{
+  font-size: 2.5rem;
+  padding-bottom: 10px;
+  border-bottom: 2px dashed #000;
+}
+.contents h3{
+  font-size: 2rem;
+}
+.contents h4{
+  font-size: 1.5rem;
+}
+.contents strong{
+  font-weight: bold;
+}
+.contents img{
+  max-width: 100%;
+}
+.sidebar, .contents{
+  display: inline-block;
+}
+.sidebar{
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  width: 15%;
+  padding-top: 50px;
+  background: #2EA2CC;
+}
+.sidebar a[href]{
+  color: white;
+  font-size: 1rem;
+}
+.sidebar ul{
+  display: block;
+  padding: 0px 10px;
+	list-style: none;
+}
+.sidebar ul a.head{
+	display: block;
+  margin: 10px 0px 5px;
+  font-size: 1.2rem;
+}
+.sidebar ul li.head ul li{
+	margin-left:5px;
+}
+.sidebar ul li:nth-child(1){
+	margin-top: 5px;
+}
+.sidebar ul li ul{
+  padding: 0px 30px;
+}
+.sidebar ul li ul li:before{
+	content: "> ";
+	color: #cccccc;
+	width:32px;
+	height:32px;
+	margin-top:5px;
+	margin-left: -16px;
+}
+#workspace .contents{
+  margin: 0px 0px 0px 15%;
+  padding: 0px 20px 40px;
+  width: 85%;
+  line-height: 24px;
+  font-size: 1.1rem;
+}
+.contents p{
+  margin-top: 10px;
+}
+.contents strong{
+  letter-spacing: 1px;
+}
+.contents code{
+  padding: 0.2em 0.5em;
+  margin: 0;
+  font-size: 100%;
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 3px;
+  word-spacing: 4;
+}
+.contents ul, .contents li{
+  list-style-type: decimal;
+  margin-left: 20px;
+}
+.contents pre ul, .contents pre li{
+  margin-left: 0;
+}
+@media screen and (max-width: 900px){
+  .sidebar{
+    position: relative;
+    width: 100%;
+    padding-top: 0;
+  }
+  .sidebar .doc-side-head{
+    display: inline-block;
+    vertical-align: top;
+  }
+  .sidebar ul li:nth-child(1) {
+    margin-top: 0;
+  }
+  #workspace .contents{
+    margin: 0;
+    width: 100%;
+  }
+}

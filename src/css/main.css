@@ -1,0 +1,236 @@
+#workspace{
+  font-size: 1.1em;
+}
+#workspace .contents{
+  background: none;
+  padding: 40px 0;
+  width: 500px;
+  min-height: 0;
+  box-shadow: none;
+}
+section{
+  background: white;
+  padding: 10% 0;
+  text-align: center;
+}
+section h2{
+  margin-top: 0;
+}
+.odd-section {
+  text-align: center;
+  background: #64C235;
+  color: white;
+}
+.even-section{
+  text-align: center;
+  background: #9c27b0;
+  color: white;
+}
+section ul{
+  color: #000;
+}
+section img{
+  max-width: 100%;
+}
+#runs-in{
+  padding: 10% 0 5%;
+}
+#navigate{
+  width: 100%;
+}
+#navigate a{
+  height: 50px;
+  margin: 0;
+  width: 25%;
+  line-height: 50px;
+  margin-left: -3px;
+}
+#intro{
+  padding: 5% 0 7%;
+}
+.section-intro{
+  margin: 2rem 0;
+  font-size: 3rem;
+  line-height: 5rem;
+}
+.section-intro .byline{
+  font-size: 2rem;
+}
+.section-intro .underlined{
+  border-bottom: 5px solid #F44336;
+  padding-bottom: 2px;
+  color: #000;
+}
+.browser-window {
+  text-align: left;
+  width: 800px;
+  display: inline-block;
+  margin-top: -17%;
+  border: 1px solid #eaeae9;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #000;
+}
+.browser-window .top-bar {
+  height: 30px;
+  border-radius: 5px 5px 0 0;
+  border-top: thin solid #eaeae9;
+  border-bottom: thin solid #dfdfde;
+  background: linear-gradient(#e7e7e6, #e2e2e1);
+}
+.browser-window .circle {
+  height: 8px;
+  width: 8px;
+  display: inline-block;
+  border-radius: 50%;
+  background-color: white;
+}
+.browser-window .circles {
+  margin: 5px 11px;
+}
+.browser-window .action-btn {
+  width: .6em;
+  height: .6em;
+  display: inline-block;
+  vertical-align: middle;
+  border: 0.1875em solid #666;
+  border-top: 0;
+  border-left: 0;
+  text-indent: -999em;
+}
+.browser-window .previous {
+  -webkit-transform: rotate(135deg);
+  -moz-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  -o-transform: rotate(135deg);
+  transform: rotate(135deg);
+}
+.browser-window .next {
+  -webkit-transform: rotate(315deg);
+  -moz-transform: rotate(315deg);
+  -ms-transform: rotate(315deg);
+  -o-transform: rotate(315deg);
+  transform: rotate(315deg);
+}
+.browser-window .page-url{
+  background: #fcfcfc;
+  padding: .5em;
+  border: .0625em solid #d8d8d8;
+}
+.browser-window #page-url{
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5em;
+}
+.browser-window .title{
+  display: inline-block;
+  margin-left: 10px;
+}
+.browser-window .page-content {
+  margin: 0;
+  width: 100%;
+  min-height: 50%;
+  display: inline-block;
+  border-radius: 0 0 5px 5px;
+  background-color: #fafafa;
+}
+.browser-window .rslides_tabs{
+  display: none;
+}
+.clear {
+  clear: both;
+}
+.rslides {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+.rslides li {
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  display: none;
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+.rslides li:first-child {
+  position: relative;
+  display: block;
+  float: left;
+}
+.rslides img {
+  display: block;
+  height: auto;
+  float: left;
+  width: 100%;
+  border: 0;
+  border-radius: 0 0 5px 5px;
+}
+.app{
+  display: inline-block;
+  margin: 0 auto;
+  position: relative;
+}
+.app img{
+  height: 200px;
+  width: 200px;
+}
+.app .app_name{
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  left: 15px;
+}
+.app:hover .app_name{
+  display: block;
+}
+#download .platform{
+  display: inline-block;
+  height: 64px;
+  width: 64px;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+#download .linux{
+  background-image: url(//server.lobby.sim/contents/apps/lobby-server/src/image/platforms/linux.svg);
+}
+#download .android{
+  background-image: url(//server.lobby.sim/contents/apps/lobby-server/src/image/platforms/android.svg);
+}
+#download .windows{
+  background-image: url(//server.lobby.sim/contents/apps/lobby-server/src/image/platforms/windows.svg);
+}
+#download .windows64{
+  background-image: url(//server.lobby.sim/contents/apps/lobby-server/src/image/platforms/windows64.svg);
+}
+#download .zip{
+  background-image: url(//server.lobby.sim/contents/apps/lobby-server/src/image/platforms/zip.svg);
+}
+#download #github{
+  background-image: url(//server.lobby.sim/contents/apps/lobby-server/src/image/github.png);
+}
+#download #facebook{
+  background-image: url(//server.lobby.sim/contents/apps/lobby-server/src/image/facebook.png);
+}
+@media screen and (max-width: 800px){
+  .browser-window{
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px){
+  #workspace .contents{
+    width: 100%;
+  }
+  section{
+    padding: 20px 0;
+  }
+  .browser-window{
+    height: 50%;
+  }
+  #navigate a{
+    width: 100%;
+  }
+}

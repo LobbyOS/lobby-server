@@ -1,0 +1,51 @@
+/*body{
+  background: #eee url('<?APP_SRC?>/src/image/bg.gif') repeat left top;
+}*/
+#workspace .contents{
+  padding: 0px 20px 40px;
+  min-height: 100%;
+  margin: 0px auto;
+  background: white;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+pre{
+  margin: 10px 15px;
+}
+nav ul a{
+  padding: 0;
+}
+nav ul a:hover{
+  background-color: initial !important;
+}
+nav #lobby-nav-btn{
+  display: inline-block;
+  position: absolute;
+}
+nav #lobby-nav-btn i{
+  font-size: 44px;
+  line-height: 44px;
+}
+nav #notify{
+  display: none;
+}
+@media screen and (max-width: 990px){
+  #panel-top-left{
+    margin-left: 0 !important;
+  }
+}
+@media screen and (max-width: 900px){
+  nav ul.left .item{
+    display: none;
+  }
+  nav ul.left .item#home{
+    display: block;
+  }
+  nav ul.right{
+    right: 0;
+  }
+}
+@media screen and (max-width: 500px){
+  #panel-top-left{
+    display: none !important;
+  }
+}

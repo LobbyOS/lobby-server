@@ -1,0 +1,156 @@
+/**
+ * \Fr\Star
+ */
+.Fr-star {
+  width: 115px;
+  height: 20px;
+  position: relative;
+  background-color: #fafafa;
+}
+.Fr-star[data-title]:hover:after {
+  content: attr(data-title);
+  padding: 4px 8px;
+  color: #333;
+  position: absolute;
+  left: 0;
+  top: 140%;
+  z-index: 20;
+  white-space: nowrap;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: 0px 0px 4px #222;
+  -webkit-box-shadow: 0px 0px 4px #222;
+  box-shadow: 0px 0px 4px #222;
+  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #eeeeee),color-stop(1, #cccccc));
+  background-image: -webkit-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -moz-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -ms-linear-gradient(top, #eeeeee, #cccccc);
+  background-image: -o-linear-gradient(top, #eeeeee, #cccccc);
+}
+.Fr-star .Fr-star-bg{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: url('<?APP_SRC?>/src/image/Fr-star.png') repeat;
+  background-size: contain;
+}
+.Fr-star .Fr-star-value{
+  height: 100%;
+  position: absolute;
+  background-color: #ffbe10;
+}
+/**
+ * End \Fr\Star
+ */
+
+/**
+ * Apps Page
+ */
+#workspace .contents{
+  width: 940px;
+  background: none;
+  padding: 0 0 40px 0;
+  box-shadow: none;
+  overflow: visible;
+}
+.nav, .apps .app{
+  box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+  border: 1px solid #e5e5e5;
+}
+.nav{
+  position: relative;
+  background: #fff;
+  padding: 20px;
+}
+.nav .nav-item{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.nav #search{
+  float: right;
+  margin: -10px 0;
+}
+.nav #search *{
+  margin: 0;
+}
+.nav #settings{
+  float: right;
+}
+.nav #settings i{
+  font-size: 2.5em;
+}
+.apps .app{
+  display: inline-block;
+  vertical-align: top;
+  width: 48.5%;
+  margin: 20px 5px;
+}
+.apps .app .app-inner{
+  position: relative;
+  height: 170px;
+  background: white;
+  padding: 20px;
+}
+.apps .app .lpane{
+  float: left;
+}
+.apps .app .lpane img{
+  width: 128px;
+  height: 128px;
+}
+.apps .app .rpane{
+  margin: 0 0 0 148px;
+}
+.apps .app .rpane .name{
+  font-size: 1.3rem;
+  line-height: 1.3;
+}
+.apps .app .bpane{
+  padding: 10px 20px;
+  margin: 0;
+  height: 65px;
+  background: #fafafa;
+  border-top: 1px solid #dedede;
+}
+.apps .app .bpane .lside{
+  float: left;
+}
+.apps .app .bpane .rside{
+  float: right;
+  text-align: right;
+}
+.apps .app .bpane .lside .downloads{
+  margin: 5px 0 0;
+}
+.tabs{
+  overflow: hidden;
+}
+@media screen and (max-width: 940px){
+  #workspace .contents{
+    width: 100%;
+  }
+  .nav #search{
+    float: none;
+    margin: 0 auto;
+  }
+  .apps .app{
+    margin: 10px 0;
+  }
+}
+@media screen and (max-width: 750px){
+  .apps .app{
+    width: 100%;
+  }
+  .nav .nav-item{
+    display: block;
+    margin: 10px 0 0;
+  }
+  .nav #settings {
+    position: absolute;
+    top: 0;
+    right: 10px;
+  }
+}

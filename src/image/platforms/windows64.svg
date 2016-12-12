@@ -1,0 +1,27 @@
+<?xml version="1.0" ?><svg height="512" preserveAspectRatio="xMidYMid" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>
+      .cls-1 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        fill:#c21400;
+      }
+
+      .cls-2, .cls-3 {
+        fill-rule: evenodd;
+      }
+
+      .cls-3 {
+        fill: #000;
+        opacity: 0.1;
+      }
+    </style></defs><circle class="cls-1" cx="256" cy="256" r="256"/><path class="cls-2" d="M256.000,512.000 C114.615,512.000 0.000,397.385 0.000,256.000 C0.000,114.615 114.615,0.000 256.000,0.000 C397.385,0.000 512.000,114.615 512.000,256.000 C512.000,397.385 397.385,512.000 256.000,512.000 ZM101.000,348.898 L197.486,368.159 L197.736,262.803 L101.000,261.536 L101.000,348.898 ZM101.000,164.102 L101.000,251.861 L197.650,250.696 L197.798,144.778 L101.000,164.102 ZM367.000,111.000 L210.843,142.174 L210.813,250.400 L367.000,248.374 L367.000,111.000 ZM367.000,265.022 L210.810,263.006 L210.780,370.813 L367.000,402.000 L367.000,265.022 Z"/><path class="cls-3" d="M436.999,75.012 C536.959,174.972 536.959,337.039 436.999,436.999 C337.039,536.959 174.972,536.959 75.012,436.999 "/><text
+     id="text4144"
+     y="484.31656"
+     x="185.38661"
+     style="font-style:normal;font-weight:normal;font-size:24.39236259px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     xml:space="preserve"><tspan
+       style="font-size:109.76563263px;fill:#ffffff"
+       y="484.31656"
+       x="185.38661"
+       id="tspan4146">64</tspan></text></svg>

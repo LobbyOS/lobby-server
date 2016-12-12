@@ -1,0 +1,7 @@
+{
+    "require": {
+        "gitonomy/gitlib": "1.0.0",
+        "sabre/dav": "2.1",
+        "symfony/process": "2.8.8"
+    }
+}

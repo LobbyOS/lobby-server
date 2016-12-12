@@ -1,0 +1,23 @@
+#workspace .contents{
+  width: 100%;
+  margin: 0;
+  padding: 0px 10px 20px 220px;
+  width: auto;
+  overflow: auto;
+  background: #fbfbfc;
+}
+.side-nav{
+  width: 200px;
+}
+@media screen and (max-width: 992px){
+  #workspace .contents {
+    padding: 0 10px;
+    width: fallback;
+  }
+}
+@media screen and (max-width: 600px){
+  #workspace .contents {
+    padding: 0;
+    width: fallback;
+  }
+}
