@@ -67,7 +67,7 @@ if($node === "dot.gif"){
       $lobby_data = json_decode($sql->fetchColumn(), true);
 
       $statVersion = $version;
-      if($version === "windows" || $version === "linux"){
+      if($version === "windows" || $version === "windows64" || $version === "linux"){
         $statVersion = $version . "-{$this->lobby_version}";
       }
 
