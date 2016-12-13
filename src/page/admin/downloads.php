@@ -5,9 +5,17 @@ $this->setTitle("Download");
   <h1>Lobby Admin</h1>
   <?php
   $sql = \Lobby\DB::getDBH()->query("SELECT `value` FROM `lobby` WHERE `key_name` = 'downloads'");
-  echo "<pre style='word-wrap: break-word;white-space: pre-wrap;'><code>";
-  var_dump($sql->fetchColumn());
-  echo "</code></pre>";
+  $r = json_decode($sql->fetchColumn(), true);
+
+  krsort($r);
+
+  echo "<ul class='collection'>";
+    foreach($r as $k => $v){
+      echo "<li class='collection-item'>$k => $v</li>";
+    }
+  echo "</ul>";
+
+  echo "<p>Total downloads - " . array_sum($r) . "</p>";
   ?>
   <h2>Usage</h2>
   <p>
