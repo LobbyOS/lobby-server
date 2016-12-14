@@ -23,7 +23,7 @@ $this->setTitle("New App");
     $apps_sql->execute(array($app_info['id']));
     
     if($apps_sql->fetchColumn() != 0){
-      ser("App Exists", "Hmmm... Looks like the App ID you submitted already exists either on App Center Or in the App Queue. " . \Lobby::l("/apps/{$app_info['id']}", "See Existing App"));
+      echo ser("App Exists", "Hmmm... Looks like the App ID you submitted already exists either on App Center Or in the App Queue. " . \Lobby::l("/apps/{$app_info['id']}", "See Existing App"));
     }else{
       $app_info["logo"] = isset($_POST["app_logo"]) ? "1" : "0";
       $lobby_web = isset($_POST['app_lobby_web']) ? 1 : 0;
