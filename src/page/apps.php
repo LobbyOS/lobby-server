@@ -92,7 +92,7 @@ if($node === "index"){
     <div class="apps">
       <?php
       if(count($apps) == 0){
-        ser("No App Found", "No app was found with the critera you gave");
+        echo ser("No App Found", "No app was found with the critera you gave");
       }else{
         foreach($apps as $app){
           $app['logo'] = $app['logo'] === "0" ? $this->srcURL . "/src/image/blank.png" : L_URL . "/api/app/{$app['id']}/logo";
@@ -107,7 +107,7 @@ if($node === "index"){
               <div class="rpane">
                 <a href="<?php echo L_URL . "/apps/" . $app['id'];?>" class="name"><?php echo $app['name'];?></a>
                 <p class="description"><?php echo $app['short_description'];?></p>
-                <p>By: <a href="<?php echo L_URL . "/u/" . $app['author'];?>"><?php echo LS::getUser("name", $app['author']);?></a></p>
+                <p>By: <a href="<?php echo $this->getProfileURL($app['author']);?>"><?php echo LS::getUser("name", $app['author']);?></a></p>
               </div>
             </div>
             <div class="bpane">
@@ -183,7 +183,7 @@ if($node === "index"){
           <?php
           $screenshots = array_filter(explode("\n", $appInfo['screenshots']));
           if(empty($screenshots)){
-            ser("No Screenshots", "This app has no screenshots");
+            echo ser("No Screenshots", "This app has no screenshots");
           }else{
             echo '<ul class="rslides">';
               foreach($screenshots as $screenshot){
@@ -257,7 +257,7 @@ if($node === "index"){
         <div id="about">
           <div class="chip">Version : <?php echo $appInfo['version'];?></div><cl/>
           <div class="chip" title="UTC Time Zone - <?php echo $appInfo['updated'];?>">Updated : <?php echo get_timeago(strtotime($appInfo['updated']));?></div><cl/>
-          <div class="chip">Author : <a href='/u/<?php echo $appInfo['author'];?>'><?php echo LS::getUser("name", $appInfo['author']);?></a></div><cl/>
+          <div class="chip">Author : <a href='<?php echo $this->getProfileURL($appInfo['author']);?>'><?php echo LS::getUser("name", $appInfo['author']);?></a></div><cl/>
           <div class="chip">Web Page : <?php echo "<a href='{$appInfo['app_page']}' target='_blank'>". htmlspecialchars($appInfo['app_page']) ."</a>";?></div>
         </div>
       </div>  
