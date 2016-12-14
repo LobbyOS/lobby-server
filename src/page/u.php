@@ -1,13 +1,15 @@
 <?php
-$sql = \Lobby\DB::getDBH()->prepare("SELECT * FROM `users` WHERE `id` = ?");
-$sql->execute(array($user));
+$sql = \Lobby\DB::getDBH()->prepare("SELECT * FROM `users` WHERE `id` = :user OR `lobby_username` = :user");
+$sql->execute(array(
+  ":user" => $user
+));
 
 if($sql->rowCount() != 0){
   $u = $sql->fetch(\PDO::FETCH_ASSOC);
   \Response::setTitle($u['display_name']);
 ?>
   <div class="contents">
-    <h1><?php echo $u['display_name'];?></h1>
+    <h1><?php echo $this->l($this->getProfileURL($u['id'], true), $u['display_name']);?></h1>
     <p>Real Name : <?php echo $u['name'];?></p>
     <p>Member of Lobby since <?php echo date("d F Y", $u['registered']);?></p>
     <h2>Apps</h2>
@@ -29,7 +31,7 @@ if($sql->rowCount() != 0){
         echo "</tbody>";
       echo "</table>";
     }else{
-      echo "User haven't created any apps";
+      echo $u['display_name'] . " haven't created any apps";
     }
     ?>
   </div>

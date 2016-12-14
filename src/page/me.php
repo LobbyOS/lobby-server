@@ -102,27 +102,57 @@ if($node === "index"){
   \Response::setTitle("Edit Profile | Me");
 ?>
   <div class="contents">
-    <h1>My Profile</h1>
+    <h1>Edit Profile</h1>
     <?php
-    $site = \Request::get("me_site");
+    $lobbyUsername = LS::getUser("lobby_username");
+
+    $site = \Request::postParam("me_site");
     $site = $site != null ? $site : LS::getUser("web_page");
-    $display_name = \Request::get("me_display");
+
+    $display_name = \Request::postParam("me_display");
     $display_name = $display_name != null ? $display_name : LS::getUser("display_name");
 
-    if(\Request::get("me_site") != null && \Request::get("me_display") != null && CSRF::check()){
-      if (preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $site)){
+    $submittedUsername = \Request::postParam("username");
+
+    if(\Request::isPOST() && CSRF::check()){
+      if(!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $site)){
+        echo ser("Invalid Website", "Website URL is invalid.");
+      }else if(!empty($submittedUsername) && strlen($submittedUsername) > 20){
+        echo ser("Username Overflow", "Username must not be longer than 20 characters.");
+      }else if(!empty($submittedUsername) && !ctype_alnum($submittedUsername)){
+        echo ser("Invalid Username", "Username must only contain alphanumeric characters.");
+      }else if(!empty($submittedUsername) && is_numeric($submittedUsername)){
+        echo ser("Invalid Username", "Username must not be a number.");
+      }else{
+        if((empty($lobbyUsername) && !empty($submittedUsername)) ? $submittedUsername : $lobbyUsername){
+          $lobbyUsername = $submittedUsername;
+        }
+
         LS::updateUser(array(
+          "lobby_username" => $lobbyUsername,
           "web_page" => $site,
           "display_name" => $display_name
         ));
-        sss("Updated Profile", "Your profile was successfully updated");
-      }else{
-        ser("Error", "The info you provided was invalid");
+        echo sss("Updated Profile", "Your profile was successfully updated");
       }
     }
     ?>
-    <p>You can see your profile <a href="<?php echo \Lobby::u("/u/" . LS::$user);?>">here</a></p>
+    <p>You can see your profile <a href="<?php echo $this->getProfileURL(LS::$user);?>" class="btn">here</a></p>
     <form action="<?php echo \Lobby::u();?>" method="POST">
+      <label>
+        <span>Username</span>
+        <p>
+          <?php
+          if($lobbyUsername === null)
+            echo "<a style='color: red;'>Caution</a>: You can only change your username once. Double check before you set it.";
+          else
+            echo "You can only change your username once";
+          ?>
+        </p>
+        <input type="text" name="username" value="<?php echo $lobbyUsername;?>" <?php if(!empty($lobbyUsername)){
+            echo "disabled='disabled'";
+          }?> />
+      </label>
       <label>
         <span>Display Name</span>
         <input type="text" name="me_display" value="<?php echo LS::getUser("display_name");?>" placeholder="Name to show in your apps" />
@@ -131,7 +161,7 @@ if($node === "index"){
         <span>My Website</span>
         <input type="text" name="me_site" value="<?php echo LS::getUser("web_page");?>" placeholder="Required" />
       </label>
-      <?php CSRF::getInput();?>
+      <?php echo CSRF::getInput();?>
       <button class="btn green">Update Profile</button>
     </form>
   </div>
@@ -198,9 +228,9 @@ if($node === "index"){
       $queue_sql->execute(array($app_info['id']));
       
       if($app_edit != true && ($queue_sql->fetchColumn() != 0 || $apps_sql->fetchColumn() != 0)){
-        ser("App Exists", "Hmmm... Looks like the App ID you submitted already exists either on App Center Or in the App Queue. " . \Lobby::l("/apps/{$app_info['id']}", "See Existing App"));
+        echo ser("App Exists", "Hmmm... Looks like the App ID you submitted already exists either on App Center Or in the App Queue. " . \Lobby::l("/apps/{$app_info['id']}", "See Existing App"));
       }else if($app_edit != true && preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $app_info['git_url']) == 0){
-        ser("Invalid URL", "The app's source code URL you provided was invalid.");
+        echo ser("Invalid URL", "The app's source code URL you provided was invalid.");
       }else{
         if($app_edit != true){
           $sql = \Lobby\DB::getDBH()->prepare("INSERT INTO `apps_queue` (`id`, `name`, `src`, `description`, `category`, `sub_category`, `app_page`, `author`, `updated`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW());");
@@ -437,5 +467,8 @@ if($node === "index"){
     });
   </script>
 <?php
+}else{
+  ser();
 }
+
 require_once $this->dir . "/src/inc/views/track.php";
