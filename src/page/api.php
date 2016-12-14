@@ -63,7 +63,7 @@ if($node === "dot.gif"){
       /**
        * Stats
        */
-      $sql = \Lobby\DB::getDBH()->query("SELECT `value` FROM `lobby` WHERE `key_name` = 'downloads'");
+      $sql = $this->dbh->query("SELECT `value` FROM `lobby` WHERE `key_name` = 'downloads'");
       $lobby_data = json_decode($sql->fetchColumn(), true);
 
       $statVersion = $version;
@@ -78,7 +78,7 @@ if($node === "dot.gif"){
       }
       $lobby_data[$statVersion] = isset($lobby_data[$statVersion]) ? $lobby_data[$statVersion] + 1 : 1;
 
-      $sql = \Lobby\DB::getDBH()->prepare("UPDATE `lobby` SET `value` = ? WHERE `key_name` = 'downloads'");
+      $sql = $this->dbh->prepare("UPDATE `lobby` SET `value` = ? WHERE `key_name` = 'downloads'");
       $sql->execute(array(json_encode($lobby_data)));
 
       /**
@@ -124,7 +124,7 @@ if($node === "dot.gif"){
       }
 
       foreach($apps as $app){
-        $sql = \Lobby\DB::getDBH()->prepare("SELECT `version`, `requires` FROM `apps` WHERE `id` = ?");
+        $sql = $this->dbh->prepare("SELECT `version`, `requires` FROM `apps` WHERE `id` = ?");
         $sql->execute(array($app));
 
         if($sql->rowCount() != 0){
@@ -170,7 +170,7 @@ if($node === "dot.gif"){
   $appID = $path[3];
   $what = $path[4];
   if($what === "logo"){
-    $sql = \Lobby\DB::getDBH()->prepare("SELECT `logo`, `git_url`, `cloud_id` FROM `apps` WHERE `id` = ?");
+    $sql = $this->dbh->prepare("SELECT `logo`, `git_url`, `cloud_id` FROM `apps` WHERE `id` = ?");
     $sql->execute(array($appID));
 
     if($sql->rowCount() === 0){
@@ -183,7 +183,7 @@ if($node === "dot.gif"){
       $lg->logo($r['logo']);
     }
   }else if($what === "download"){
-    $sql = \Lobby\DB::getDBH()->prepare("SELECT `git_url`, `cloud_id` FROM `apps` WHERE `id` = ?");
+    $sql = $this->dbh->prepare("SELECT `git_url`, `cloud_id` FROM `apps` WHERE `id` = ?");
     $sql->execute(array($appID));
 
     if($sql->rowCount() === 0){
@@ -192,7 +192,7 @@ if($node === "dot.gif"){
       require_once __DIR__ . "/../inc/LobbyGit.php";
       $r = $sql->fetch(\PDO::FETCH_ASSOC);
 
-      $sql = \Lobby\DB::getDBH()->prepare("UPDATE `apps` SET `downloads` = `downloads` + 1 WHERE `id` = ?");
+      $sql = $this->dbh->prepare("UPDATE `apps` SET `downloads` = `downloads` + 1 WHERE `id` = ?");
       $sql->execute(array($appID));
 
       $lg = new LobbyGit($appID, $r["git_url"], $r["cloud_id"]);
@@ -264,7 +264,7 @@ if($node === "dot.gif"){
 
   $query .= " LIMIT :start, :stop";
 
-  $sql = \Lobby\DB::getDBH()->prepare($query);
+  $sql = $this->dbh->prepare($query);
   foreach($append as $name => $value){
     $sql->bindParam($name, $value);
   }
@@ -279,7 +279,7 @@ if($node === "dot.gif"){
     $results = $sql->fetchAll(\PDO::FETCH_ASSOC);
 
     if(isset($total_query)){
-      $total_apps = \Lobby\DB::getDBH()->prepare($total_query);
+      $total_apps = $this->dbh->prepare($total_query);
       if(isset($total_query_params)){
         foreach($append as $name => $value){
           $total_apps->bindParam($name, $value);
@@ -297,7 +297,6 @@ if($node === "dot.gif"){
     );
 
     require_once $this->dir . "/src/inc/Parsedown.php";
-    require_once $this->dir . "/src/inc/DB.php";
     require_once $this->dir . "/src/inc/Fr.star.php";
 
     $Parsedown = new Parsedown();
@@ -318,7 +317,7 @@ if($node === "dot.gif"){
     foreach($results as $r){
       $response['apps'][$i] = $r;
       $response['apps'][$i]['author'] = getAuthorName($r['author']);
-      $response['apps'][$i]['author_page'] = \Lobby::u("/u/{$r['author']}");
+      $response['apps'][$i]['author_page'] = $this->getProfileURL($r['author']);
       $response['apps'][$i]['description'] = $Parsedown->text(htmlspecialchars($r['description']));
       $response['apps'][$i]['image'] = L_URL . "/api/app/{$r['id']}/logo";
       $response['apps'][$i]['permalink'] = L_URL . "/apps/{$r['id']}";

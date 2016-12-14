@@ -3,6 +3,7 @@ namespace Lobby\App;
 
 use Hooks;
 use Lobby\App\lobby_server\Fr\LS;
+use Lobby\DB;
 use Lobby\UI\Panel;
 
 class lobby_server extends \Lobby\App {
@@ -45,6 +46,15 @@ class lobby_server extends \Lobby\App {
     )
   );
 
+  /**
+   * @var \PDO Database handler
+   */
+  public $dbh;
+
+  public function init(){
+    $this->dbh = DB::getDBH();
+  }
+
   public function page($p){
     $path = explode("/", $p);
 
@@ -78,7 +88,9 @@ class lobby_server extends \Lobby\App {
       }
     });
 
-    if($path[1] === "me"){
+    require_once $this->dir . "/src/inc/logsys.php";
+
+    if($path[1] === "me" && LS::$loggedIn){
       Panel::addLeftItem("me-dash", array(
         "text" => "Dashboard",
         "href" => "/me/home"
@@ -215,13 +227,11 @@ class lobby_server extends \Lobby\App {
       )
     ));
 
-    require_once $this->dir . "/src/inc/logsys.php";
-
     $meSubItems = array();
     if(LS::$loggedIn){
       $meSubItems["Profile"] = array(
         "text" => "My Profile",
-        "href" => "/u/" . LS::$user
+        "href" => $this->getProfileURL(LS::$user)
       );
       $meSubItems["EditProfile"] = array(
         "text" => "Edit Profile",
@@ -302,7 +312,26 @@ class lobby_server extends \Lobby\App {
 
       print $data;
     }else{
-      ser("<h2>File Doesn't Exist</h2>", "The file you requested to download isn't available on the server.");
+      echo ser("<h2>File Doesn't Exist</h2>", "The file you requested to download isn't available on the server.");
     }
   }
+
+  /**
+   * Get URL to profile
+   * @param  int    $userID   User's ID
+   * @param  bool   $relative Whether relative path should be returned
+   * @return string           URL to profile
+   */
+  public function getProfileURL($userID, $relative = false){
+    $sth = $this->dbh->prepare("SELECT `lobby_username` FROM `users` WHERE `id` = ?");
+    $sth->execute(array($userID));
+
+    $lobbyUsername = $sth->fetchColumn();
+
+    if(!empty($lobbyUsername))
+      return $relative ? "/u/$lobbyUsername" : $this->u("/u/$lobbyUsername");
+    else
+      return $relative ? "/u/$userID" : $this->u("/u/$userID");
+  }
+
 }
